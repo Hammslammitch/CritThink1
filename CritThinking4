@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class GradeStatistics {
+    public static void main(String[] args) {
+        final int NUM_GRADES = 10;
+        double[] grades = new double[NUM_GRADES];
+        Scanner scanner = new Scanner(System.in);
+
+        // Taking grades from user input
+        System.out.println("Enter " + NUM_GRADES + " grades:");
+        for (int i = 0; i < NUM_GRADES; i++) {
+            while (true) {
+                System.out.print("Grade " + (i + 1) + ": ");
+                if (scanner.hasNextDouble()) {
+                    grades[i] = scanner.nextDouble();
+                    break;
+                } else {
+                    System.out.println("Please enter a valid number.");
+                    scanner.next(); // consume invalid input
+                }
+            }
+        }
+        
+        // Calculate the average
+        double sum = 0;
+        for (double grade : grades) {
+            sum += grade;
+        }
+        double average = sum / NUM_GRADES;
+
+        // Find the maximum and minimum grades
+        double maxGrade = grades[0];
+        double minGrade = grades[0];
+        for (int i = 1; i < NUM_GRADES; i++) {
+            if (grades[i] > maxGrade) {
+                maxGrade = grades[i];
+            }
+            if (grades[i] < minGrade) {
+                minGrade = grades[i];
+            }
+        }
+
+        // Print out the statistics
+        System.out.println("Average Grade: " + average);
+        System.out.println("Maximum Grade: " + maxGrade);
+        System.out.println("Minimum Grade: " + minGrade);
+
+        scanner.close();
+    }
+}
